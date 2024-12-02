@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(AoC2024-Day1)
+project(AoC2024-Day2)
 
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 14)
