@@ -2,7 +2,6 @@
 #include "assert.h"
 #include <aoc.hpp>
 
-
 enum direction {
     eTop,
     eRight,
@@ -48,26 +47,25 @@ uint64_t ex2(lines_t& v)
 {
     std::vector<hit_s> hits;
 
-    for (int rowIdx = 1; rowIdx < v.size()-1; rowIdx++) {
+    for (int rowIdx = 1; rowIdx < v.size() - 1; rowIdx++) {
         bool lastX = false;
         int colIdx = 1;
         while (!lastX) {
-            
+
             colIdx = v[rowIdx].find("A", colIdx);
-            if (colIdx == std::string::npos || colIdx == v[rowIdx].size()-1) {
+            if (colIdx == std::string::npos || colIdx == v[rowIdx].size() - 1) {
                 lastX = true;
                 colIdx = 0;
                 break;
             }
-            char data[] = {v[rowIdx-1][colIdx-1], v[rowIdx-1][colIdx+1], v[rowIdx+1][colIdx+1], v[rowIdx+1][colIdx-1]};
-            int offset =0;
-            for(;offset<4;offset++){
-                if (data[offset]=='M' && data[(offset+1)%4] == 'M' &&
-                    data[(offset+2)%4] == 'S' && data[(offset+3)%4] == 'S'){
-                        hits.push_back({rowIdx, colIdx, eX});
-                    }
+            char data[] = { v[rowIdx - 1][colIdx - 1], v[rowIdx - 1][colIdx + 1], v[rowIdx + 1][colIdx + 1], v[rowIdx + 1][colIdx - 1] };
+            int offset = 0;
+            for (; offset < 4; offset++) {
+                if (data[offset] == 'M' && data[(offset + 1) % 4] == 'M' && data[(offset + 2) % 4] == 'S' && data[(offset + 3) % 4] == 'S') {
+                    hits.push_back({ rowIdx, colIdx, eX });
+                }
             }
-                
+
             colIdx++;
         }
     }
@@ -147,10 +145,10 @@ uint64_t testXmas(lines_t& v, std::vector<hit_s>& hits, int row, int col)
             hits.push_back({ row, col, eBottomLeft });
     }
 
-    if ((col >= (testfor.size()-1))) { // Test Left
+    if ((col >= (testfor.size() - 1))) { // Test Left
         bool found = true;
         for (int ii = 0; ii < testfor.size(); ii++) {
-            if (v[row][col-ii] != testfor[ii]) {
+            if (v[row][col - ii] != testfor[ii]) {
                 found = false;
                 break;
             }
