@@ -26,12 +26,12 @@ reportGrid_t loadData(std::string fname) {
 bool singleIsSafe(std::vector<int> &it) {
 
   bool isSafe = true;
-  int lastSign = sgn<int>(it[1 ] - it[0]);
+  int lastSign = sgn<int>(it[1] - it[0]);
   int lastValue = it[0];
   for (int ii = 1; ii < it.size(); ii++) {
 
     int newSign = sgn<int>(it[ii] - lastValue);
-    if (((ii>1) && (newSign != lastSign)) || (newSign == 0) ||
+    if (((ii > 1) && (newSign != lastSign)) || (newSign == 0) ||
         (abs(it[ii] - lastValue) > 3)) {
       isSafe = false;
       break;
@@ -43,28 +43,31 @@ bool singleIsSafe(std::vector<int> &it) {
 }
 uint64_t countSafeReports(reportGrid_t input, bool dampener = false) {
   uint64_t cntSafe = 0;
-
+  int wtf = 0;
   for (auto &it : input) {
     bool safe = false;
     int tripIdx, dummy;
     if (singleIsSafe(it)) {
       safe = true;
-    } else if (dampener){
-        for (int ii = 0; ii < it.size(); ii++){
-          std::vector<int> redvec(0);
-            for (int jj=0; jj< it.size(); jj++)
-            {
-                if (ii!=jj) redvec.push_back(it[jj]);
-
-            }
-            if (singleIsSafe(redvec)){
-                safe = true;
-                break;
-            }
+    } else if (dampener) {
+      for (int ii = 0; ii < it.size(); ii++) {
+        std::vector<int> redvec(0);
+        for (int jj = 0; jj < it.size(); jj++) {
+          if (ii != jj)
+            redvec.push_back(it[jj]);
         }
-
+        if (singleIsSafe(redvec)) {
+          safe = true;
+          break;
+        }
+        
+        
+      }if (!safe) std::cout << wtf << std::endl;
+      
     }
-    if (safe) cntSafe++;
+    if (safe)
+      cntSafe++;
+    wtf++;
   }
-    return cntSafe;
-  }
+  return cntSafe;
+}

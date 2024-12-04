@@ -7,10 +7,15 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
-template <typename T> int sgn(T val) {
+template <typename T>
+int sgn(T val)
+{
     return (T(0) < val) - (val < T(0));
 }
-void loadLines(std::string fname, std::vector<std::string> &v){
+typedef std::vector<std::string> lines_t;
+
+void loadLines(std::string fname, lines_t& v)
+{
     std::ifstream indata(fname);
     assert(indata.is_open());
     std::string w1, w2;
